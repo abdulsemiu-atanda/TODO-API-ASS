@@ -1,15 +1,15 @@
-import fs from 'fs';
-import path from 'path';
-import Sequelize from 'sequelize';
+import fs from 'fs'
+import path from 'path'
+import Sequelize from 'sequelize'
 
-require('dotenv').config();
+require('dotenv').config()
 
-const env = process.env.NODE_ENV || 'development';
-const config = require(`${__dirname}/../config/config.json`)[env];
-const basename = path.basename(module.filename);
+const env = process.env.NODE_ENV || 'development'
+const config = require(`${__dirname}/../config/config.json`)[env]
+const basename = path.basename(module.filename)
 
-const db = {};
-const sequelize = new Sequelize(process.env[config.use_env_variable], config);
+const db = {}
+const sequelize = new Sequelize(process.env[config.use_env_variable], config)
 
 
 fs
@@ -22,14 +22,14 @@ fs
   .forEach((file) => {
     const model = sequelize.import(path.join(__dirname, file));
     db[model.name] = model;
-  });
+  })
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
-});
+})
 
-db.sequelize = sequelize;
+db.sequelize = sequelize
 
-export default db;
+export default db

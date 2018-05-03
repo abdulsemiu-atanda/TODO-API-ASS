@@ -1,2 +1,5 @@
 # ignore node modules folder
 node_modules/**
+
+# ignore production build folder
+build/**

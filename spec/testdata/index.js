@@ -9,6 +9,15 @@ export const fakeUser = {
   RoleId: 1
 }
 
+export const fakeRegularUser = {
+  username: faker.internet.userName(),
+  email: faker.internet.email(),
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
+  password: faker.internet.password(),
+  RoleId: 2
+}
+
 export const fakeRoleUser = {
   username: faker.internet.userName(),
   email: faker.internet.email(),

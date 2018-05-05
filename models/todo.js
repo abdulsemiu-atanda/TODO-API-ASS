@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   Todo.associate = (models) => {
-    Todo.belongsTo(models.Role, {
+    Todo.belongsTo(models.User, {
       foreignKey: 'OwnerId',
       onDelete: 'CASCADE'
     })

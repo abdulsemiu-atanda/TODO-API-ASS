@@ -47,11 +47,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE'
     });
     User.hasMany(models.Todo, {
-      foreignKey: {
-        name: 'OwnerId',
-        allowNull: false,
-      },
-      onDelete: 'CASCADE'
+      foreignKey: 'OwnerId'
     });
   }
   return User;

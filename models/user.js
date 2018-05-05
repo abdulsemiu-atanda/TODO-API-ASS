@@ -29,23 +29,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     }
   }, {
-    classMethods: {
-      associate: (models) => {
-        User.belongsTo(models.Role, {
-          foreignKey: {
-            allowNull: false
-          },
-          onDelete: 'CASCADE'
-        });
-        User.hasMany(models.Todo, {
-          foreignKey: {
-            name: 'OwnerId',
-            allowNull: false,
-          },
-          onDelete: 'CASCADE'
-        });
-      }
-    },
     hooks: {
       beforeCreate: (theUser) => {
         theUser.password = bCrypt.hashSync(theUser.password,
@@ -57,5 +40,19 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
+
+  User.associate = (models) => {
+    User.belongsTo(models.Role, {
+      foreignKey: 'RoleId',
+      onDelete: 'CASCADE'
+    });
+    User.hasMany(models.Todo, {
+      foreignKey: {
+        name: 'OwnerId',
+        allowNull: false,
+      },
+      onDelete: 'CASCADE'
+    });
+  }
   return User;
 };

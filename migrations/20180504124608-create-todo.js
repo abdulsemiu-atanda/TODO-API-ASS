@@ -24,7 +24,8 @@ module.exports = {
         }
       },
       status: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.ENUM('pending', 'completed'),
+        defaultValue: 'pending'
       },
       createdAt: {
         allowNull: false,

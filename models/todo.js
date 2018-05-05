@@ -10,18 +10,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    status: DataTypes.BOOLEAN
-  }, {
-    classMethods: {
-      associate: (models) => {
-        Todo.belongsTo(models.User, {
-          foreignKey: {
-            allowNull: false
-          },
-          onDelete: 'CASCADE'
-        })
-      }
+    status: {
+      type: DataTypes.ENUM('pending', 'completed'),
+      defaultValue: 'pending'
     }
-  });
-  return Todo;
+  })
+
+  Todo.associate = (models) => {
+    Todo.belongsTo(models.Role, {
+      foreignKey: 'OwnerId',
+      onDelete: 'CASCADE'
+    })
+  }
+
+  return Todo
 };

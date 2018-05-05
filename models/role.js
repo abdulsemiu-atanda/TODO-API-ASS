@@ -5,13 +5,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING
     }
-  }, {
-    classMethods: {
-      associate(models) {
-        Role.hasMany(models.User);
-      }
-    }
-  });
+  })
+
+  Role.associate = (models) => {
+    Role.hasMany(models.User)
+  }
 
   return Role;
 };

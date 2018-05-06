@@ -71,6 +71,17 @@ describe('API V1 Roles', () => {
           done()
         })
     })
+
+    it('allow admin get specified role', done => {
+      request(app)
+        .get('/api/v1/roles?title=Admin')
+        .set('Authorization', fakeAdminToken)
+        .then(response => {
+          expect(response.status).to.equal(302)
+          expect(response.body.title).to.equal('Admin')
+          done()
+        })
+    })
   })
 
   context('POST /roles', () => {
@@ -102,6 +113,97 @@ describe('API V1 Roles', () => {
           done()
         })
     })
+
+    it('errors when admin tries to create existing role', done => {
+      request(app)
+        .post('/api/v1/roles').send(fakeRole)
+        .set('Authorization', fakeAdminToken)
+        .then(response => {
+          expect(response.status).to.equal(400)
+          done()
+        })
+    })
   })
 
+  context('PUT /roles', () => {
+    it('does not allow unauthenticated request', done => {
+      request(app)
+        .put('/api/v1/roles/2').send({title: 'Kid'})
+        .then(response => {
+          expect(response.status).to.equal(401)
+          done()
+        })
+    })
+
+    it('does not allow non-admin update role', done => {
+      request(app)
+        .put('/api/v1/roles/2').send({title: 'Kid'})
+        .set('Authorization', fakeUserToken)
+        .then(response => {
+          expect(response.status).to.equal(401)
+          done()
+        })
+    })
+
+    it('allows admin update role', done => {
+      request(app)
+        .put('/api/v1/roles/2').send({title: 'Kid'})
+        .set('Authorization', fakeAdminToken)
+        .then(response => {
+          expect(response.status).to.equal(200)
+          done()
+        })
+    })
+
+    it('errors when admin tries to update a non-existing role', done => {
+      request(app)
+        .put('/api/v1/roles/40').send({title: 'Kid'})
+        .set('Authorization', fakeAdminToken)
+        .then(response => {
+          expect(response.status).to.equal(400)
+          done()
+        })
+    })
+  })
+
+  context('DELETE /roles', () => {
+    it('does not allow unauthenticated request', done => {
+      request(app)
+        .delete('/api/v1/roles/2')
+        .then(response => {
+          expect(response.status).to.equal(401)
+          done()
+        })
+    })
+
+    it('does not allow non-admin delete role', done => {
+      request(app)
+        .delete('/api/v1/roles/2')
+        .set('Authorization', fakeUserToken)
+        .then(response => {
+          expect(response.status).to.equal(401)
+          done()
+        })
+    })
+
+    it('allows admin delete role', done => {
+      request(app)
+        .delete('/api/v1/roles/3')
+        .set('Authorization', fakeAdminToken)
+        .then(response => {
+          expect(response.status).to.equal(200)
+          done()
+        })
+    })
+
+    it('errors when admin tries to delete non-existing role', done => {
+      request(app)
+        .delete('/api/v1/roles/50')
+        .set('Authorization', fakeAdminToken)
+        .then(response => {
+          expect(response.status).to.equal(400)
+          done()
+        })
+    })
+  })
 })

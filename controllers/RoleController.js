@@ -44,7 +44,7 @@ class RoleController {
         res.status(422).send({message: 'Unable to process your request'})
       else
         res.status(200).send({message: `Role with id ${req.params.id} successfully deleted`})
-    })
+    }).catch(err => res.status(400).send(err.errors))
   }
 }
 

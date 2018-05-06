@@ -11,23 +11,25 @@ let role
 let todo
 
 describe('Todo Model', () => {
-  before(() => {
+  before(done => {
     role = Role.build(fakeRole)
     user = User.build(fakeUser)
     todo = Todo.build(fakeTodo)
     role.save()
     user.save()
+    done()
   })
 
   after(() => Role.sequelize.sync({ force: true }))
 
   it('creates a todo instance', () => expect(todo).to.exist)
 
-  it('saves todo correctly', () => {
+  it('saves todo correctly', done => {
     todo.save().then(savedTodo => {
       expect(savedTodo.title).to.equal(fakeTodo.title)
       expect(savedTodo.description).to.equal(fakeTodo.description)
       expect(savedTodo.status).to.equal('pending')
+      done()
     })
   })
 

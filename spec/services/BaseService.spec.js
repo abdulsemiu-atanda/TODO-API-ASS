@@ -108,6 +108,10 @@ describe('BaseService', () => {
         done()
       })
     })
+
+    it('returns null for non-existing resource', () => {
+      TodoService.show({id: 12}).then(todo => expect(todo).to.not.exist)
+    })
   })
 
   context('Destroy', () => {

@@ -58,7 +58,7 @@ class UserController {
   }
   
   static destroy(req, res) {
-    if (req.decoded.id === req.params.id) {
+    if (req.decoded.id === req.params.id || req.decoded.RoleId === 1) {
       UserService.destroy({id: req.params.id}).then(response => {
         if (response.length)
           res.status(422).send({message: 'Unable to process your request'})

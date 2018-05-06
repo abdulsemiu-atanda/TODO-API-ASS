@@ -20,10 +20,13 @@ class Authentication {
   static isAdmin(req, res, next) {
     const user = Authentication.verify(req.headers.authorization)
     
-    if (user && user.RoleId === 1)
+    if (user && user.RoleId === 1) {
+      req.decoded = user
       next()
-    else
+    }
+    else {
       res.status(401).send({message: 'User not authorized'})
+    }
   }
 
   static isLoggedIn(req, res, next) {

@@ -15,7 +15,7 @@ userRoute.route('/:id')
   .delete(Authentication.isLoggedIn, UserController.destroy)
 
 userRoute.route('/login')
-  .post(UserController.create)
+  .post(UserController.logIn)
 
 userRoute.route('/refreshToken')
   .post(Authentication.refreshToken)

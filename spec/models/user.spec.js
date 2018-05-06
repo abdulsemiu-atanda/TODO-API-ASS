@@ -1,7 +1,7 @@
 import faker from 'faker'
 import {expect} from 'chai'
 import bcrypt from 'bcrypt'
-import db from '../../models'
+import db from '../../server/models'
 import {fakeUser, fakeRoleUser, fakeRole, nullAttributeUser, noRoleUser} from '../testdata'
 
 const Role = db.Role

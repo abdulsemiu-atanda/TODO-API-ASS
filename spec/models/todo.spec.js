@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 
-import db from '../../models'
+import db from '../../server/models'
 import {fakeRole, fakeUser, fakeTodo, invalidStatusTodo, noOwnerTodo, noTitleTodo} from '../testdata'
 
 const Todo = db.Todo

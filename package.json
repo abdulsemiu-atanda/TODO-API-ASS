@@ -4,10 +4,10 @@
   "description": "A simple CRUD api for managing todos",
   "main": "index.js",
   "scripts": {
-    "start:prod": "node build/app-compiled.js",
+    "start": "node build/app.js",
     "test": "NODE_ENV=test ./node_modules/mocha/bin/mocha spec/** --require babel-core/register --exit",
-    "start:dev": "nodemon app.js --exec babel-node",
-    "build": "babel app.js --out-file build/app-compiled.js --source-maps"
+    "start:dev": "nodemon ./server/app.js --exec babel-node",
+    "build": "babel -d ./build ./server -s"
   },
   "keywords": [
     "api",

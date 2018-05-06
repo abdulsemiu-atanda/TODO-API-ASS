@@ -1,8 +1,8 @@
 import {expect} from 'chai'
 import bcrypt from 'bcrypt'
 
-import BaseService from '../../services/BaseService'
-import db from '../../models'
+import BaseService from '../../server/services/BaseService'
+import db from '../../server/models'
 import {fakeRole, fakeUser, fakeTodo} from '../testdata'
 
 

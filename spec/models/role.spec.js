@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 
-import db from '../../models'
+import db from '../../server/models'
 import {fakeRole, invalidRole} from '../testdata'
 
 let role

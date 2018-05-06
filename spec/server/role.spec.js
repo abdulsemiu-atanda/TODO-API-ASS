@@ -1,8 +1,8 @@
 import request from 'supertest'
 import {expect} from 'chai'
 
-import app from '../../app'
-import db from '../../models'
+import app from '../../server/app'
+import db from '../../server/models'
 import {fakeUser, fakeRegularUser, fakeRole} from '../testdata'
 
 let fakeAdminToken

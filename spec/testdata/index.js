@@ -74,3 +74,9 @@ export const noTitleTodo = {
   status: faker.lorem.word(),
   OwnerId: 1
 }
+
+export const fakeUserTodo = {
+  title: faker.lorem.words(),
+  description: faker.lorem.paragraph(),
+  OwnerId: 2
+}

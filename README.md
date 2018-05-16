@@ -40,7 +40,7 @@ Simple CRUD TODO API
 - DELETE `/api/v1/roles/:id`
 
 ### Users
-- GET `/api/v1/users`, `/api/v1/users/:id`
+- GET `/api/v1/users`, `/api/v1/users/:id`, `/api/v1/users/refreshToken`
 - POST `/api/v1/users`
   1. Sample login request body
     ```json
@@ -69,3 +69,23 @@ Simple CRUD TODO API
       }
     ```
 - DELETE `/api/users/:id`
+
+### Todos
+- GET `/api/v1/todos`, `/api/v1/todos/:id`
+- POST `/api/v1/todos`
+  1. Sample request body
+    ```json
+      {
+        "title": "Reading",
+        "description": "Get Moby Dick from Barnes and Noble",
+        "OwnerId": 1
+      }
+    ```
+- PUT `/api/v1/todos/:id`
+  1. Sample request body
+    ```json
+      {
+        "status": "completed"
+      }
+    ```
+- DELETE `/api/v1/todos/:id`

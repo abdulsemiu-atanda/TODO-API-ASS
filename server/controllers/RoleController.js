@@ -2,12 +2,13 @@ import jwt from 'jsonwebtoken'
 
 import BaseService from '../services/BaseService'
 import db from '../models'
+import {sanitize} from '../../util/util'
 
 const RoleService = new BaseService(db.Role)
 
 class RoleController {
   static create(req, res) {
-    RoleService.create({title: req.body.title}).then(role => {
+    RoleService.create({title: sanitize(req.body.title)}).then(role => {
       res.status(201).send(role)
     }).catch(err => {
       res.status(400).send(err.errors)
@@ -16,7 +17,7 @@ class RoleController {
 
   static show(req, res) {
     if (req.query.title) {
-      RoleService.show({title: req.query.title}).then(role => {
+      RoleService.show({title: sanitize(req.query.title)}).then(role => {
         if (role)
           res.status(302).send(role)
         else

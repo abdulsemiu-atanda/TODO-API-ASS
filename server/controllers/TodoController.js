@@ -1,5 +1,6 @@
 import BaseService from '../services/BaseService'
 import db from '../models'
+import {sanitize} from '../../util/util'
 
 const TodoService = new BaseService(db.Todo)
 
@@ -28,20 +29,6 @@ class TodoController {
     } else {
       res.status(401).send({message: 'Unauthorized to perform this request.'})
     }
-  }
-
-  static hasPermission(id, userId) {
-    let hasPermission
-  
-    TodoService.show({id}).then(todoResource => {
-      if (todoResource.OwnerId === userId)  {
-        hasPermission = true
-      } else {
-        hasPermission = false
-      }
-    })
-
-    return hasPermission
   }
 
   static update(req, res) {

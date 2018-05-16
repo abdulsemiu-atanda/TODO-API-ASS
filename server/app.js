@@ -3,6 +3,7 @@ import bodyParser from 'body-parser'
 
 import roleRoutes from './routes/roleRoutes'
 import userRoutes from './routes/userRoutes'
+import todoRoutes from './routes/todoRoutes'
 
 // Set up the express app
 const app = express()
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use('/api/v1/roles', roleRoutes)
 app.use('/api/v1/users', userRoutes)
+app.use('/api/v1/todos', todoRoutes)
 
 // Setup a default catch-all route that sends back a welcome message in JSON format.
 app.get('*', (req, res) => res.status(200).send({
